@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve homesensors
+After=network.target
+
+[Service]
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/homesensors
+Environment="PATH=/home/pi/homesensors/homesensorsenv/bin"
+ExecStart=/home/pi/homesensors/homesensorsenv/bin/uwsgi --ini homesensors.ini
+
+[Install]
+WantedBy=multi-user.targe
