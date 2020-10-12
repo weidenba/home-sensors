@@ -5,9 +5,9 @@ After=network.target
 [Service]
 User=pi
 Group=pi
-WorkingDirectory=/home/pi/homesensors
-Environment="PATH=/home/pi/homesensors/homesensorsenv/bin"
-ExecStart=/home/pi/homesensors/homesensorsenv/bin/uwsgi --ini homesensors.ini
+WorkingDirectory=/home/pi/home-sensors/src
+Environment="PATH=/home/pi/home-sensors/src/homesensorsenv/bin"
+ExecStart=/home/pi/home-sensors/src/homesensorsenv/bin/uwsgi --ini homesensors.ini
 
 [Install]
 WantedBy=multi-user.targe
