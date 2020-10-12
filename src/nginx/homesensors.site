@@ -4,6 +4,6 @@ server {
 
     location / {
         include uwsgi_params;
-        uwsgi_pass unix:/home/pi/homesensors/homesensors.sock;
+        uwsgi_pass unix:/home/pi/home-sensors/src/homesensors.sock;
     }
 }
