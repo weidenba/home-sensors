@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 User=pi
-Group=pi
+Group=www-data
 WorkingDirectory=/home/pi/home-sensors/src
 Environment="PATH=/home/pi/home-sensors/src/homesensorsenv/bin"
 ExecStart=/home/pi/home-sensors/src/homesensorsenv/bin/uwsgi --ini homesensors.ini
