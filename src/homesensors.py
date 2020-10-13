@@ -1,9 +1,14 @@
 from flask import Flask
+from sensor_io.dht22 import get_current_sensor_value
+
+
 app = Flask(__name__)
+
 
 @app.route("/")
 def home():
-    return "Test Message"
+    sensor_value = get_current_sensor_value()
+    return "Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(sensor_value.temperature, sensor_value.humidity)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

@@ -11,6 +11,5 @@ sudo cp systemd/homesensors.service /etc/systemd/system/
 sudo ln -s /home/pi/home-sensors/src/nginx/homesensors.site /etc/nginx/sites-enabled/
 python3 -m venv homesensorsenv
 source homesensorsenv/bin/activate
-pip3 install wheel
-pip3 install uwsgi flask 
+pip3 install -r requirements.txt
 ```
