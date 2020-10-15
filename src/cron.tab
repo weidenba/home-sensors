@@ -1,0 +1,1 @@
+*/15 * * * * python3 /home/pi/home-sensors/src/log_data.py

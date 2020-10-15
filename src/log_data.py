@@ -17,7 +17,7 @@ def _setup_argparser():
     parser = argparse.ArgumentParser(description='{} - {}'.format(PROGRAM_NAME, PROGRAM_DESCRIPTION))
     parser.add_argument('-V', '--version', action='version', version='{} {}'.format(PROGRAM_NAME, PROGRAM_VERSION))
     parser.add_argument('-d', '--debug', action='store_true', default=False, help='print debug messages')
-    parser.add_argument('-l', '--log_file', default='home/pi/sensor.log', help='log file location')
+    parser.add_argument('-l', '--log_file', default='/home/pi/sensor.log', help='log file location')
     return parser.parse_args()
 
 
@@ -38,7 +38,12 @@ if __name__ == '__main__':
     _setup_logging(args)
 
     current_data = get_current_sensor_value()
-    logging.info('{}, Humidity: {0.1f}%, Temperature: {0.1f}°C'.format(unix_to_hr_time(current_data.timestamp), current_data.humidity, current_data.temperature))
-    add_data_to_log_file(Path(args.log_file), current_data)
+    logging.info('{0!s}, Humidity: {1:0.1f}%, Temperature: {2:0.1f}°C'.format(unix_to_hr_time(current_data.timestamp), current_data.humidity, current_data.temperature))
+    
+    log_file = Path(args.log_file)
+
+    logging.debug(args.log_file)
+
+    add_data_to_log_file(log_file, current_data)
 
     sys.exit()
