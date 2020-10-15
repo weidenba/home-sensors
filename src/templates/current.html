@@ -2,4 +2,8 @@
 
 {% block title %} Current Values {% endblock %}
 
-{% block content%} {{ timestamp }} Humidity: {{ "$%.2f"|format(humidity) }} Temperature: {{ "$%.2f"|format(temperature) }}  {% endblock %}
+{% block content%}
+{{ timestamp }} <br />
+Humidity: {{ "%.2f"|format(humidity) }}% <br /> 
+Temperature: {{ "%.2f"|format(temperature) }}&deg;C
+{% endblock %}
