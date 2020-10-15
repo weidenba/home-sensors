@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+
+{% block title %} Current Values {% endblock %}
+
+{% block content%} {{ timestamp }} Humidity: {{ "$%.2f"|format(humidity) }} Temperature: {{ "$%.2f"|format(temperature) }}  {% endblock %}
