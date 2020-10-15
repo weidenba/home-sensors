@@ -6,6 +6,7 @@ def read_data(file_path: Path) -> list:
     try:
         with open(file_path, 'r') as data_file:
             log_entries = data_file.readlines()
+        return log_entries
     except Exception as e:
         logging.error('Could not read file!')
 
