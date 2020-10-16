@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %} History {% endblock %}
+
+{% block head %}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Humidity %', {{current_sensor_data.humidity}}],
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+	  greenFrom: 40, greenTo: 60,
+          redFrom: 70, redTo: 100,
+          yellowFrom:60, yellowTo: 70,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('humidity'));
+
+        chart.draw(data, options);
+      }
+</script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Temperature °C', {{current_sensor_data.temperature}}],
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+	  greenFrom: 15, greenTo: 25,
+          redFrom: 35, redTo: 60,
+          yellowFrom:25, yellowTo: 35,
+	  min:-10, max: 60,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('temperature'));
+
+        chart.draw(data, options);
+      }
+</script>
+
+
+<script type="text/javascript">
+	          google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+	          var data = new google.visualization.DataTable();
+	          data.addColumn('string', 'Time');
+	          data.addColumn('number', 'Humidity %');
+	          data.addColumn('number', 'Temperature °C');
+
+	          data.addRows( {{data|safe}} );
+
+	          var options = {
+			          chart: {
+					            title: 'Sensor History',
+					          },
+			          width: 900,
+			          height: 500
+			        };
+
+	          var chart = new google.charts.Line(document.getElementById('sensor_history'));
+
+	          chart.draw(data, google.charts.Line.convertOptions(options));
+	        }
+    </script>
+
+
+{% endblock %}
+
+{% block content%}
+<h1>{{timestamp}}</h1>
+<table>
+	<tr>
+		<td><div id="humidity" style="width: 120px; height: 120px;"></div></td>
+		<td><div id="temperature" style="width: 120px; height: 120px;"></div></td>
+	</tr>
+</table>
+<br />
+<div id="sensor_history" style="width: 450px; height: 500px"></div>
+{% endblock %}
